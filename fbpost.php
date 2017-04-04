@@ -16,13 +16,15 @@ $html = str_replace("<h2>", $hash, $html);
 $html = strip_tags($html);
 $sections = explode($hash, $html);
 foreach ($sections as $section) {
-	if (strpos($section, "節日、風俗習慣") === 0) {
-		$lines = explode("\n", $section);
-		foreach ($lines as $line) {
-			$line = trim($line);
-			if ($line !== "" && $line !== "節日、風俗習慣") {
-				$line = preg_replace("/\[\d+\]/", "", $line);
-				$message .= "\n".$line;
+	foreach ($C['SectionTitle'] as $title) {
+		if (strpos($section, $title) === 0) {
+			$lines = explode("\n", $section);
+			foreach ($lines as $line) {
+				$line = trim($line);
+				if ($line !== "" && $line !== $title) {
+					$line = preg_replace("/\[\d+\]/", "", $line);
+					$message .= "\n".$line;
+				}
 			}
 		}
 	}
