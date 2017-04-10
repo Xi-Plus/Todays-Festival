@@ -7,7 +7,7 @@ if (!in_array(PHP_SAPI, $C["allowsapi"])) {
 $month = date("n");
 $date = date("j");
 
-$message = $month."月".$date."日的節日、風俗習慣有\n";
+$message = "";
 
 $html = file_get_contents("https://zh.wikipedia.org/zh-tw/".$month."月".$date."日?action=render");
 $html = html_entity_decode($html);
@@ -29,7 +29,14 @@ foreach ($sections as $section) {
 		}
 	}
 }
-$message .= "\n\n來源： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
+if ($message === "") {
+	$message = $month."月".$date."日目前找不到任何節日、風俗習慣\n\n".
+		"立即上維基百科添加： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
+} else {
+	$message = $month."月".$date."日的節日、風俗習慣有\n".
+		$message."\n\n".
+		"來源： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
+}
 echo $message."\n";
 
 $ch = curl_init();
