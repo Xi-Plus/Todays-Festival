@@ -23,6 +23,9 @@ foreach ($sections as $section) {
 				$line = trim($line);
 				if ($line !== "" && $line !== $title) {
 					$line = preg_replace("/\[\d+\]/", "", $line);
+					if (strpos($line, "維基共享資源中相關的多媒體資源：") === 0) {
+						continue;
+					}
 					$message .= "\n".$line;
 				}
 			}
