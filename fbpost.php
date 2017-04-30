@@ -22,10 +22,11 @@ foreach ($sections as $section) {
 			foreach ($lines as $line) {
 				$line = trim($line);
 				if ($line !== "" && $line !== $title) {
-					$line = preg_replace("/\[\d+\]/", "", $line);
 					if (strpos($line, "維基共享資源中相關的多媒體資源：") === 0) {
 						continue;
 					}
+					$line = preg_replace("/\[\d+\]/", "", $line);
+					$line = str_replace("[來源請求]", "", $line);
 					$message .= "\n".$line;
 				}
 			}
