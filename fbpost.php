@@ -17,8 +17,9 @@ $html = strip_tags($html);
 $sections = explode($hash, $html);
 foreach ($sections as $section) {
 	foreach ($C['SectionTitle'] as $title) {
-		if (strpos($section, $title) === 0) {
+		if (strpos($section, $title) !== false && strpos($section, "目錄") === false) {
 			$lines = explode("\n", $section);
+			unset($lines[0]);
 			foreach ($lines as $line) {
 				$line = trim($line);
 				if ($line !== "" && $line !== $title) {
@@ -30,6 +31,7 @@ foreach ($sections as $section) {
 					$message .= "\n".$line;
 				}
 			}
+			break;
 		}
 	}
 }
@@ -37,7 +39,7 @@ if ($message === "") {
 	$message = $month."月".$date."日目前找不到任何節日、風俗習慣\n\n".
 		"立即上維基百科添加： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
 } else {
-	$message = $month."月".$date."日的節日、風俗習慣有\n".
+	$message = $month."月".$date."日的節假日、習俗、紀念日有\n".
 		$message."\n\n".
 		"來源： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
 }
