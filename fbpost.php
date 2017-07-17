@@ -41,7 +41,7 @@ if ($message === "") {
 } else {
 	$message = $month."月".$date."日的節假日、習俗、紀念日有\n".
 		$message."\n\n".
-		"來源： https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
+		"來源：中文維基百科 (CC-BY-SA-3.0) https://zh.wikipedia.org/zh-tw/".$month."月".$date."日";
 }
 echo $message."\n";
 
