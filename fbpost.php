@@ -3,6 +3,7 @@ require(__DIR__.'/config/config.php');
 if (!in_array(PHP_SAPI, $C["allowsapi"])) {
 	exit("No permission");
 }
+date_default_timezone_set("Asia/Taipei");
 
 $testmode = isset($argv[1]);
 $month = date("n");
